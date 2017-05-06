@@ -32,7 +32,7 @@ they probably also work in a terminal window on a Mac.
 + As of this writing, the two most commonly used websites that offer free and easy hosting of git repositories are GitHub.com and Bitbucket.org.
 
 + For Bitbucket, follow
-  [these instructions](https://confluence.atlassian.com/bitbucket/create-a-repository-for-your-existing-files-800695576.html)
+  [these instructions](https://www.atlassian.com/git/tutorials/setting-up-a-repository)
   to create a remote repository.
 
 + For GitHub, follow [these instructions](https://help.github.com/articles/create-a-repo/).
