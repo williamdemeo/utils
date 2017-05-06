@@ -6,21 +6,23 @@ This page explains how to initialize a git repository and how to execute the thr
 
 This guide assumes the following:
 
-+ **Git** You already installed the `git` program on your machine. 
++ **Git.** You already installed the `git` program on your machine. 
   (If not see the
   [install-git tutorial](https://www.atlassian.com/git/tutorials/install-git).)
 
-+ **Bitbucket/GitHub Account** You have a Bitbucket or GitHub
++ **Bitbucket or GitHub.** You have a Bitbucket or GitHub
   account. (If not, go to
    [bitbucket.org](https://bitbucket.org/) or
    [github.com](https://github.com) to create one.)
 
-3. **ssh keys** You shared your public ssh-key with Bitbucket or GitHub. (If not, see
++ **SSH keys.** You shared your public ssh-key with Bitbucket or GitHub. (If not, see
    the instructions for [Bitbucket](https://confluence.atlassian.com/bitbucket/add-an-ssh-key-to-an-account-302811853.html#AddanSSHkeytoanaccount-HowtoaddakeyusingSSHforOSXorLinux)
    or 
    [GitHub](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
 
-### Create a remote repository for your project (in the cloud)
+-------------------------------------------
+
+## Create a remote repository for your project (in the cloud)
 
 The commands described here are known to work at the Linux command line, but
 they probably also work in a terminal window on a Mac.
@@ -35,7 +37,9 @@ they probably also work in a terminal window on a Mac.
 
 In the next step, I will assume you named your new remote repository `project1`.
 
-### Create a local repo for your project (on your own harddrive)
+--------------------------------------------
+
+## Create a local repo for your project (on your own harddrive)
 
 Here is are the steps required to create a local repository.
 For the precise syntax, see the example below.
@@ -53,7 +57,9 @@ At the command line, these steps are accomplished as follows:
     git init
     git remote add origin git@github.com:your_git_username/project1.git
 
-### Add and commit new files and changes, then push to the remote repo
+--------------------------------------
+
+## Add and commit new files and changes, then push to the remote repo
 
 1. *Stage* the README.md file using the `git add` command (as shown below).
 2. *Commit* the staged changes using the `git commit`command.
@@ -67,7 +73,9 @@ If all went well, then from now on when you want to add new files to
 the `project1` repo or commit changes to existing files, you will repeat
 these three simple steps: 1. stage, 2. commit, 3. push.
 
-### Branching and pull requests
+----------------------------------
+
+## Branching and pull requests
 The next thing you should learn how to do is to create and merge
 branches, and submit and accept pull requests.  These topics are
 covered in many place already, and the point of this little tutorial was to simply demonstrate a very basic git workflow.
