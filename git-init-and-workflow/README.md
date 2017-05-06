@@ -3,15 +3,26 @@
 This page explains how to initialize a git repository and how to execute the three most basic git commands used to manage project files.  The aim of this guide is to help students get started with git, and it covers only the bare minimum needed to get going.
 
 ## Prerequisites
-We assume you have already installed the git program on your machine.
-(See the [instructions here](https://help.github.com/articles/set-up-git/) if
-you don't yet have git istalled.)
 
+This guide assumes the following:
+
+1. You have already installed the git program on your machine. (If not
+see the
+[install-git tutorial](https://www.atlassian.com/git/tutorials/install-git).)
+2. You have a Bitbucket (or GitHub) account. (If not, go to
+   [bitbucket.org](https://bitbucket.org/) or
+   [github.com](https://github.com) to create one.)
+
+3. You have shared an ssh-key with your Bitbucket (or GitHub)
+   account. (If not, see
+   [these instructions for Bitbucket](https://confluence.atlassian.com/bitbucket/add-an-ssh-key-to-an-account-302811853.html#AddanSSHkeytoanaccount-HowtoaddakeyusingSSHforOSXorLinux)
+   or 
+   [these other instructions for GitHub](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
+
+### Create a remote repository for your project (in the cloud)
 
 The commands described here are known to work at the Linux command line, but
 they probably also work in a terminal window on a Mac.
-
-### Create a remote repository for your project (in the cloud)
 
 + This is where you will store, organize, and keep records of your files.
 
