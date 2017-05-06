@@ -6,18 +6,19 @@ This page explains how to initialize a git repository and how to execute the thr
 
 This guide assumes the following:
 
-1. You have already installed the git program on your machine. (If not
-see the
-[install-git tutorial](https://www.atlassian.com/git/tutorials/install-git).)
-2. You have a Bitbucket (or GitHub) account. (If not, go to
++ **Git** You already installed the `git` program on your machine. 
+  (If not see the
+  [install-git tutorial](https://www.atlassian.com/git/tutorials/install-git).)
+
++ **Bitbucket/GitHub Account** You have a Bitbucket or GitHub
+  account. (If not, go to
    [bitbucket.org](https://bitbucket.org/) or
    [github.com](https://github.com) to create one.)
 
-3. You have shared an ssh-key with your Bitbucket (or GitHub)
-   account. (If not, see
-   [these instructions for Bitbucket](https://confluence.atlassian.com/bitbucket/add-an-ssh-key-to-an-account-302811853.html#AddanSSHkeytoanaccount-HowtoaddakeyusingSSHforOSXorLinux)
+3. **ssh keys** You shared your public ssh-key with Bitbucket or GitHub. (If not, see
+   the instructions for [Bitbucket](https://confluence.atlassian.com/bitbucket/add-an-ssh-key-to-an-account-302811853.html#AddanSSHkeytoanaccount-HowtoaddakeyusingSSHforOSXorLinux)
    or 
-   [these other instructions for GitHub](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
+   [GitHub](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
 
 ### Create a remote repository for your project (in the cloud)
 
