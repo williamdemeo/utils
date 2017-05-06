@@ -27,13 +27,16 @@ This guide assumes the following:
 The commands described here are known to work at the Linux command line, but
 they probably also work in a terminal window on a Mac.
 
-+ This is where you will store, organize, and keep records of your files.
++ Your remote repository is where you will store, organize, and keep records of your files.
 
 + As of this writing, the two most commonly used websites that offer free and easy hosting of git repositories are GitHub.com and Bitbucket.org.
 
++ For Bitbucket, follow
+  [these instructions](https://confluence.atlassian.com/bitbucket/create-a-repository-for-your-existing-files-800695576.html)
+  to create a remote repository.
+
 + For GitHub, follow [these instructions](https://help.github.com/articles/create-a-repo/).
 
-+ For Bitbucket, follow [these instructions](https://confluence.atlassian.com/bitbucket/create-a-repository-for-your-existing-files-800695576.html).
 
 In the next step, I will assume you named your new remote repository `project1`.
 
