@@ -1,0 +1,57 @@
+bindsym $mod+Return exec lxterminal
+bindsym $mod+t exec lxterminal
+bindsym $mod+g exec google-chrome
+bindsym $mod+s exec stx
+bindsym $mod+d exec dmenu_run
+bindsym $mod+l exec i3lock -c 111111
+bindsym $mod+k kill
+bindsym $mod+m move scratchpad
+bindsym $mod+o scratchpad show
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+m move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+f fullscreen
+bindsym $mod+Alt+s layout stacking
+bindsym $mod+Alt+z layout tabbed
+bindsym $mod+Alt+e layout toggle split
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+q focus parent
+bindsym $mod+ampersand workspace $tag1
+bindsym $mod+eacute workspace $tag2
+bindsym $mod+quotedbl workspace $tag3
+bindsym $mod+apostrophe workspace $tag4
+bindsym $mod+parenleft workspace 5
+bindsym $mod+minus workspace 6
+bindsym $mod+egrave workspace 7
+bindsym $mod+underscore workspace 8
+bindsym $mod+ccedilla workspace 9
+bindsym $mod+agrave workspace 10
+bindsym $mod+Shift+ampersand move container to workspace $tag1
+bindsym $mod+Shift+eacute move container to workspace $tag2
+bindsym $mod+Shift+quotedbl move container to workspace $tag3
+bindsym $mod+Shift+apostrophe move container to workspace $tag4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+minus move container to workspace 6
+bindsym $mod+Shift+egrave move container to workspace 7
+bindsym $mod+Shift+underscore move container to workspace 8
+bindsym $mod+Shift+ccedilla move container to workspace 9
+bindsym $mod+Shift+agrave move container to workspace 10
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+bindsym $mod+r mode "resize"
+bindsym $mod+Print exec "sleep 0.2; scrot -q 100 -s '/home/thb/pictures/shots/%Y-%m-%d-%H-%M-%S_$wx$h.png'"
