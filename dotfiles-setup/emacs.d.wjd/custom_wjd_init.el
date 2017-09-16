@@ -4,15 +4,15 @@
 ; modified [2013.07.23] by <williamdemeo@gmail.com>
 ; modified [2011.01.01] by <williamdemeo@gmail.com>
 
-(setq load-path (cons "~/.elisp" load-path))
+(setq load-path (cons "~/.emacs.d" load-path))
 (scroll-bar-mode -1)
 
 ;; Proof General IDE for Coq
-;(load-file "~/opt/ProofGeneral/generic/proof-site.el")
+(load-file "/usr/share/emacs/site-lisp/proofgeneral/generic/proof-site.el")
+;;(load-file "~/opt/ProofGeneral/generic/proof-site.el")
 
-;; Agda mode
-;; (load-file (let ((coding-system-for-read 'utf-8))
-;;                 (shell-command-to-string "agda-mode locate")))
+
+
 
 ;; If emacs is started in a new window, that window 
 ;; should be sized appropriately for your screen.
@@ -27,28 +27,82 @@
   (arrange-frame 187 48 70 0)  ; <<<< set the w h x y variables here
 )
 
+(require 'package)
+(setq package-archives
+      '( ("melpa-stable" . "http://stable.melpa.org/packages/")
+	("melpa"     . "http://melpa.milkbox.net/packages/")
+	("marmalade" . "http://marmalade-repo.org/packages/")
+        ("gnu"       . "http://elpa.gnu.org/packages/")))
+(package-initialize)
+
+;; (setq package-archives '(
+;; 			  ("gnu" . "http://elpa.gnu.org/packages/")
+;;       ("marmalade" . "http://marmalade-repo.org/packages/")
+;;       ("melpa" . "http://melpa.milkbox.net/packages/")
+;;  ("melpa-stable" . "http://stable.melpa.org/packages/")
+;;       ))
+
+;; (add-to-list 'package-archives
+;;   '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+;; (package-initialize)
+
+;; (require 'package)
+;; (add-to-list 'package-archives
+;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; (package-initialize)
+
+
 ;;
 ;; For Magit
 ;;
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-      ("marmalade" . "http://marmalade-repo.org/packages/")
-      ("melpa" . "http://melpa.milkbox.net/packages/")))
 ;; If you want to use magit, install the magit package
 ;; (if you haven't done so already) with the following commands:
 ;; \M package-refresh-contents
 ;; \M package-install [Enter] magit
 (define-key global-map "\M-gm" 'magit-status)
 
-;;
-;; For Scala
+
+;;;;------ For Haskell ------------------------
 ;;
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
+(package-refresh-contents)
+
+;; Install Intero
+;; Intero comes with ghc-mod, flycheck, company
+(package-install 'intero)
+(add-hook 'haskell-mode-hook 'intero-mode)
+
+;; Tidal cycles
+(add-to-list 'load-path "~/git/TEAMS/TypeFunc/gh/uh-mfc/haskelltalk/") ;; Look for tidal.el in ~/uh-mfc/haskelltalk/
+(require 'tidal)
+(setq tidal-interpreter "~/git/TEAMS/TypeFunc/gh/uh-mfc/haskelltalk/ghciscript")
+;;;;------------------------------
+
+;;;; ------ For Agda ----------------
+ (load-file (let ((coding-system-for-read 'utf-8))
+                 (shell-command-to-string "agda-mode locate")))
+;;;; --------------------------------
+
+
+(setenv "LD_LIBRARY_PATH"
+  (let ((current (getenv "LD_LIBRARY_PATH"))
+        (new "/usr/local/lib"))
+    (if current (concat new ":" current) new)))
+
+
+;;;; ------ For LEAN ----------------
+(setq lean-rootdir "~/git/PROGRAMMING/LEAN/lean")
+(setq load-path (cons "~/git/PROGRAMMING/LEAN/lean/src/emacs" load-path))
+(require 'lean-mode)
+;;;; --------------------------------
+
+
+
+;;;;--------- For Scala -------------------
 (unless (package-installed-p 'scala-mode2)
   (package-refresh-contents) (package-install 'scala-mode2))
-
+;;;;----------------------------------------------
 
 ;;; uncomment this line to disable loading of "default.el" at startup
 (setq inhibit-default-init t)
@@ -72,21 +126,6 @@
 (define-key global-map "\C-cs" 'shell)
 (define-key global-map "\C-cg" 'gdb)
 
-;; 
-;;  Matlab/Octave Mode
-;;
- (autoload 'matlab-mode "matlab" "matlab mode." t)
- ;(autoload 'octave-mode "octave-mod" nil t)
- (setq auto-mode-alist
-       (cons '("\\.m$" . matlab-mode) auto-mode-alist))
- ;      (cons '("\\.m$" . octave-mode) auto-mode-alist))
- ;(add-hook 'octave-mode-hook
- (add-hook 'matlab-mode-hook
- 	  (lambda () 
- ;	    (abbrev-mode 1)
- 	    (auto-fill-mode 1)
- 	    (font-lock-mode 1)))
- ;; see: file:///usr/share/doc/octave2.1-htmldoc/octave_39.html#SEC230
 
 ;; (autoload 'noweb-mode "noweb-mode" "noweb mode." t)
 ;; (setq auto-mode-alist
@@ -106,7 +145,7 @@
       (cons '("\\.def$" . LaTeX-mode) auto-mode-alist))
 (add-hook 'LaTeX-mode-hook 
           (lambda () 
-	    (auto-fill-mode 1)
+;	    (auto-fill-mode 1)
 	    (font-lock-mode 1)))
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
 
@@ -119,7 +158,7 @@
 
  (add-hook 'latex-mode-hook
  	  (lambda () 
- 	    (auto-fill-mode t)
+; 	    (auto-fill-mode t)
 	    (reftex-mode t)))
 
 
@@ -139,7 +178,9 @@
 (setq auto-mode-alist (append (list '("\\.md$" . markdown-mode)
                                     '("\\.markdown$" . markdown-mode))
                               auto-mode-alist))
-(add-hook 'markdown-mode-hook (lambda () (auto-fill-mode 1)))
+(add-hook 'markdown-mode-hook (lambda ()
+;				(auto-fill-mode 1)
+				))
 
 ;;
 ;; NOTES
@@ -150,15 +191,6 @@
 ;  Then, suppose you got `font-latex-math-face', edit ~/.Xdefaults and add:
 ;    Emacs.font-latex-math-face.attributeForeground: blue
 ;
-
-;;
-;; C/C++ Modes
-;;
-; reference: Learning Emacs, p.327
-;(add-hook 'c++-mode-hook
-;	  '(lambda ()
-;	     (c-set-style "stroustrup")))
-
 
 ;;
 ;; From file:///usr/share/doc/xemacs21/README.Debian
@@ -173,16 +205,6 @@
 ;	(setq save-abbrevs t)
 
 
-;; gap mode
-;(autoload 'gap-mode "gap-mode" "Gap editing mode" t)
-;(setq auto-mode-alist (append (list '("\\.g$" . gap-mode)
-;                                    '("\\.gap$" . gap-mode))
-;                              auto-mode-alist))
-;;(autoload 'gap "gap-process" "Run GAP in emacs buffer" t)
-;(add-hook 'gap-mode-hook 'turn-on-font-lock)
-
-;;(setq gap-executable "/usr/algebra/bin/gap")
-;;(setq gap-start-options (list "-l" "/usr/algebra/gap3.1/lib" "-m" "2m"))
 
 
 (custom-set-variables
@@ -190,9 +212,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(agda2-include-dirs (quote ("." "/home/williamdemeo/git/Agda/agda-prelude/src" "/usr/share/agda-stdlib")))
+ ;; '(agda2-include-dirs (quote ("." "/home/williamdemeo/git/PROGRAMMING/AGDA/agda-stdlib/src")))
  '(ansi-color-names-vector ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
- '(auto-fill-mode t)
+; '(auto-fill-mode t)
  '(case-replace nil)
  '(column-number-mode t)
 ; '(custom-enabled-themes (quote (deeper-blue)))
@@ -221,21 +243,6 @@
 ; Set font
 ;(set-default-font "Inconsolata-12")
 
-;;;; ----uncomment this section to use emacs for gmail----
-;; (setq starttls-use-gnutls t)
-;; (setq send-mail-function 'smtpmail-send-it
-;;       message-send-mail-function 'smtpmail-send-it
-;;       smtpmail-starttls-credentials
-;;       '(("smtp.gmail.com" 587 nil nil))
-;;       smtpmail-auth-credentials
-;;       (expand-file-name "~/.authinfo")
-;;       smtpmail-default-smtp-server "smtp.gmail.com"
-;;       smtpmail-smtp-server "smtp.gmail.com"
-;;       smtpmail-smtp-service 587
-;;       smtpmail-debug-info t)
-;; (require 'smtpmail)
-;;;; ----end gmail section
-
 (require 'color-theme)
   (setq my-color-themes (list 'color-theme-billw 'color-theme-jsc-dark 
                               'color-theme-sitaramv-solaris 'color-theme-resolve
@@ -254,12 +261,12 @@
 			      'color-theme-wombat 'color-theme-zenburn))
 ; Load theme
 ;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-;(load-theme 'monokai t)
-;(load-theme 'exu t)
 (require 'color-theme)
 (color-theme-initialize)
-;(color-theme-snowish)
 (color-theme-tty-dark)
+;(load-theme 'monokai t)
+;(load-theme 'exu t)
+;(color-theme-snowish)
 
 ;; Gap
 
@@ -268,6 +275,11 @@
                                    '("\\.g$" . gap-mode)
                                    '("\\.gap$" . gap-mode)
                                    auto-mode-alist))
-;; Agda
-(load-file (let ((coding-system-for-read 'utf-8))
-                (shell-command-to-string "agda-mode locate")))
+;; org-mode
+(require 'package)
+;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(require 'org-journal)
+(custom-set-variables
+ '(org-journal-dir "~/git/org/journal/"))
+(require 'ox-reveal)
