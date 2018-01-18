@@ -1,6 +1,6 @@
 #!/bin/bash
 # Simple setup.sh for configuring Ubuntu 14.04 LTS EC2 instance
-# for headless setup. 
+# for headless setup.
 # Originally copied from the Stanford Startup course and then modified
 # by William DeMeo <williamdemeo@gmail.com>
 # Date: 2013.07.14
@@ -11,107 +11,85 @@ echo 'This script will install/configure some useful tools on a Ubuntu Linux mac
 echo
 echo 'Here is a summary of what will be installed:'
 echo
-echo '    1.  git-core (main components required to use Git version control software)'
-echo '    2.  emacs24 (a recent release of Emacs) and emacs-goodies-el'
-echo '    3.  dotfiles.wjd (configuration files; see: https://github.com/williamdemeo/dotfiles.wjd'
-echo '        .profile, .bashrc, .bash_aliases, .bash_profile, .bashrc_custom, .screenrc, .emacs.'
-echo '    4.1  Java               openjdk-7-jdk (unless a suitable JRE is already present)'
-echo '    4.2  Scala Build Tool   sbt-0.13.2 (unless sbt is already in the path)'
-echo '    4.3  Eclipse            scala-SDK-3.0.3-2.10-linux.gtk.x86_64 (a version of Eclipse IDE with Scala support)'
-echo ' '
-echo '    Optionally, the following may be installed:'
-echo ' '
-echo '    5.1  Proof General '
-echo '    5.2  Coq'
-echo '    5.3  Agda'
-echo ' '
+echo "1. Git  (git-core)"
+echo "2. Emacs (emacs25, emacs24-el, and emacs25-common-non-dfsg)"
+echo "3. Dot Files (.profile, .bashrc, .bash\_aliases, .bash\_profile, .bashrc\_custom, .screenrc, .emacs)."
+echo "4. Java (openjdk-8-jdk, unless a suitable JRE is already present)"
+echo "5. Scala (sbt-0.13.2, unless sbt is already in the path)"
+echo "6. Optionally, the following may also be installed:"
+echo "   a. IntelliJ (my favorite IDE for coding in Scala and Java)"
+echo "   b. Proof General (for doing type theory and constructive math in emacs)"
+echo "   c. The Lean Prover (my favorite proof assistant and functional programming language)"
+echo "   d. Coq (my second favorite proof assistant)"
+echo " "
 echo
 read -p 'Abort this setup script? [Y/n]' -n 1 -r
-if [[ $REPLY =~ ^[Yy]$ ]] 
-then
-    echo
-    echo 'Setup aborted.'
-    echo
-    exit
+if [[ $REPLY =~ ^[Yy]$ ]];then
+  echo
+  echo 'Setup aborted.'
+  echo
+  exit
 fi
-echo
-
 echo
 echo '###############################################################################'
 echo
 echo '    1.  git-core (main components required to use Git version control software)'
 echo
-sudo apt-get install -y git-core
-
+sudo apt install -y git-core
 echo
 echo '###############################################################################'
 echo
-echo '    2.  emacs24 (a recent release of Emacs) and emacs-goodies-el'
+echo '    2.  emacs25 (a recent release of Emacs) and emacs-goodies-el'
 echo
-# Install emacs24
-# https://launchpad.net/~cassou/+archive/emacs
-sudo apt-add-repository -y ppa:cassou/emacs
-sudo apt-get update
-sudo apt-get install -y emacs24 emacs24-el emacs24-common-non-dfsg
-sudo apt-get install emacs-goodies-el
-
+sudo apt install -y emacs25 emacs25-el emacs25-common-non-dfsg
 echo
 echo '###############################################################################'
 echo
-echo '    3.  dotfiles.wjd (configuration files; see: https://github.com/williamdemeo/dotfiles.wjd'
+echo '    3.  dotfiles.wjd (configuration files)'
 echo
 cd $HOME
-dotfiles_path=$HOME'/.dotfiles.wjd'
+dotfiles_path=$HOME'/.bash.d'
 
 # Check for pre-existing .dotfiles.wjd directory
 # If one exists, ask whether to rename it and continue. (Otherwise, abort.)
 if [ -d $dotfiles_path/ ]; then
-    echo
-    echo '    Directory '$dotfiles_path' already exists...'
-    read -p '    Rename it? [Y/n]' -n 1 -r
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
-	mv $dotfiles_path $dotfiles_path'_backup_'$(date +'%Y%m%d:%H:%M')
-
-	# Also move pre-existing dotfiles.wjd out of the way:
-	if [ -d $HOME'/dotfiles.wjd' ]; then
-	    mv $HOME'/dotfiles.wjd' $HOME'/dotfiles.wjd.tmp'
-	fi
-
-	# Get the dotfiles.wjd repository, then rename it to keep $HOME looking cleaner:
-	git clone https://github.com/williamdemeo/dotfiles.wjd.git
-	cd dotfiles.wjd
-	git remote set-url origin git@github.com:williamdemeo/dotfiles.wjd.git
-	cd 
-	mv dotfiles.wjd .dotfiles.wjd 
-
-	# Restore possibly pre-existing dotfiles.wjd:
-	if [ -d $HOME'/dotfiles.wjd.tmp' ]; then
-	    mv $HOME'/dotfiles.wjd.tmp' $HOME'/dotfiles.wjd'
-	fi
-
-	# Create the required links.
-	# (If a file or link of that name exists, rename it with .orig extension.)
-	ln -sb --suffix='.orig' ~/.dotfiles.wjd/screenrc ~/.screenrc
-	ln -sb --suffix='.orig' ~/.dotfiles.wjd/bashrc.wjd ~/.bashrc
-	ln -sb --suffix='.orig' ~/.dotfiles.wjd/bashrc_custom.wjd ~/.bashrc_custom
-	ln -sb --suffix='.orig' ~/.dotfiles.wjd/bash_profile.wjd ~/.bash_profile
-	ln -sb --suffix='.orig' ~/.dotfiles.wjd/bash_aliases.wjd ~/.bash_aliases
-	ln -sb --suffix='.orig' ~/.dotfiles.wjd/profile.wjd ~/.profile
-
-	# Don't do the same for directory links as it might cause infinite link loops.
-	# Instead, do:
-	if [ -h $HOME'/.emacs.d' ]; then
-	    mv $HOME'/.emacs.d' $HOME'/.emacs.d.orig'
-	fi
-	ln -s ~/.dotfiles.wjd/emacs.d.wjd ~/.emacs.d
-	ln -sb --suffix='.orig' ~/.dotfiles.wjd/emacs.d.wjd/init.el ~/.emacs
-    else
-	echo
-	echo '    ...skipping dotfiles setup.'
-	echo
-    fi
+  echo
+  echo '    Directory '$dotfiles_path' already exists...renaming it.'
+  mv $dotfiles_path $dotfiles_path'_backup_'$(date +'%Y%m%d:%H:%M')
 fi
+
+if [ -d $HOME'/bash.d.tar.gz' ]; then
+  mv $HOME'/bash.d.tar.gz' $HOME'/bash.d.tar.gz_backup_'$(date +'%Y%m%d:%H:%M')
+fi
+if [ -d $HOME'/bash.d' ]; then
+  mv $HOME'/bash.d' $HOME'/bash.d_backup_'$(date +'%Y%m%d:%H:%M')
+fi
+cd $HOME
+wget https://github.com/williamdemeo/utils/raw/master/dotfiles-setup/bash.d.tar.gz
+tar xvzf bash.d.tar.gz
+mv bash.d .bash.d
+
+# Create the required links.
+# (If a file or link of that name exists, rename it with .orig extension.)
+ln -sb --suffix='.orig' ~/.bash.d/screenrc ~/.screenrc
+ln -sb --suffix='.orig' ~/.bash.d/bashrc.wjd ~/.bashrc
+ln -sb --suffix='.orig' ~/.bash.d/bashrc_custom.wjd ~/.bashrc_custom
+ln -sb --suffix='.orig' ~/.bash.d/bash_profile.wjd ~/.bash_profile
+ln -sb --suffix='.orig' ~/.bash.d/bash_aliases.wjd ~/.bash_aliases
+ln -sb --suffix='.orig' ~/.bash.d/profile.wjd ~/.profile
+
+if [ -d $HOME'/.emacs.d' ]; then
+  mv $HOME'/.emacs.d' $HOME'/.emacs.d_backup_'$(date +'%Y%m%d:%H:%M')
+fi
+cd $HOME
+wget https://github.com/williamdemeo/utils/raw/master/dotfiles-setup/emacs.d.tar.gz
+tar xvzf emacs.d.tar.gz
+mv emacs.d .emacs.d
+if [ -d $HOME'/.emacs' ]; then
+  mv $HOME'/.emacs' $HOME'/.emacs_backup_'$(date +'%Y%m%d:%H:%M')
+fi
+ln -sb --suffix='.orig' ~/.emacs.d/init.el ~/.emacs
+
 echo
 echo '###############################################################################'
 echo ' '
@@ -121,23 +99,22 @@ echo
 echo "       4.1 Java JDK..."
 echo
 if type -p java; then
-    echo '         Found Java executable in PATH.'
-    _java=java
+  echo '         Found Java executable in PATH.'
+  _java=java
 elif [[ -n "$JAVA_HOME" ]] && [[ -x "$JAVA_HOME/bin/java" ]];  then
-    echo '         Found Java executable in JAVA_HOME.'
-    _java="$JAVA_HOME/bin/java"
+  echo '         Found Java executable in JAVA_HOME.'
+  _java="$JAVA_HOME/bin/java"
 else
+  echo
+  read -p '         No Java found. Install it? [Y/n]' -n 1 -r
+  if [[ $REPLY =~ ^[Yy]$ ]];then
+    sudo apt install -y openjdk-9-jdk
+  else
     echo
-    read -p '         No Java found. Install it? [Y/n]' -n 1 -r
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
-	sudo apt-get install openjdk-7-jdk
-    else
-	echo 
-	echo '         WARNING: skipping java setup!'
-	echo
-	exit 1
-    fi
+	  echo '         WARNING: skipping java setup!'
+	  echo
+	  exit 1
+  fi
 fi
 echo
 echo "       4.2 Scala Build Tool..."
@@ -148,131 +125,98 @@ if type -p sbt; then
 else
     echo
     read -p '         No sbt found in PATH. Install it? [Y/n]' -n 1 -r
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
-	mkdir -p $HOME/opt
-	cd $HOME/opt
-	wget -N http://dl.bintray.com/sbt/native-packages/sbt/0.13.2/sbt-0.13.2.tgz
-	tar xzf sbt-0.13.2.tgz
-	rm sbt-0.13.2.tgz
-	mkdir -p $HOME/bin
-	# Create link (if it already exists, rename it with .orig extension.)
-	ln -sb --suffix='.orig' $HOME/opt/sbt/bin/sbt $HOME/bin/sbt
-	echo
-	echo '         ...sbt installed in $HOME/bin.  (Make sure $HOME/bin is in your PATH.)'
-	echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+      sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
+      sudo apt update
+      sudo apt install -y sbt
     else
-	echo 
-	echo '         WARNING: skipping sbt setup!'
-	echo
+      echo
+      echo '      ...ok, skipping sbt setup!'
+      echo
     fi
 fi
 echo
-echo "       4.3 Eclipse..."
+echo "       4.3 IntelliJ..."
 echo
-if type -p eclipse; then
-    echo '         Found eclipse executable in PATH.'
-    _eclipse=eclipse
+if type -p idea; then
+  echo '         Found idea executable in PATH.'
+  _idea=idea
 else
-    echo
-    read -p '         No eclipse found. Install it? [Y/n]' -n 1 -r
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
-	wget -N http://downloads.typesafe.com/scalaide-pack/3.0.3.vfinal-210-20140327/scala-SDK-3.0.3-2.10-linux.gtk.x86_64.tar.gz
-	tar xzf scala-SDK-3.0.3-2.10-linux.gtk.x86_64.tar.gz
-	mv -i eclipse scala-SDK-3.0.3-2.10
-	rm scala-SDK-3.0.3-2.10-linux.gtk.x86_64.tar.gz
-	# Create link (if it already exists, rename it with .orig extension.)
-	ln -sb --suffix='.orig' $HOME/opt/scala-SDK-3.0.3-2.10/eclipse $HOME/bin/eclipse
+  echo
+  read -p '         No IntelliJ found. Install it? [Y/n]' -n 1 -r
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    mkdir -p $HOME/opt
+    mkdir -p $HOME/opt/JETBRAINS
+    cd $HOME/opt/JETBRAINS
+    wget -N https://download.jetbrains.com/idea/ideaIC-2017.3.3.tar.gz
+	  tar xvzf ideaIC-2017.3.3.tar.gz
+	  ln -sb --suffix='.orig' $HOME/opt/JETBRAINS/idea-IC-*/bin/idea.sh $HOME/bin/idea
+	  echo
+	  echo "     --------------------------------------------------------"
+	  echo "     |   RUN IntelliJ IDE with the command $HOME/bin/idea   |"
+	  echo "     --------------------------------------------------------"
+  else
 	echo
-	echo '         ...eclipse installed in $HOME/bin.  (Make sure $HOME/bin is in your PATH.)'
+	echo '      ...ok, skipping IntelliJ setup.'
 	echo
-    else
-	echo 
-	echo '         WARNING: skipping eclipse setup!'
-	echo
-    fi
+  fi
 fi
 echo
 echo '###############################################################################'
 echo
-echo '    6. Proof General, Coq, Cabal, and Agda  (Optional)'
+echo '    6. Proof General, Lean, Coq'
 echo ' '
 read -p '       6.1 Would you like to install Proof General? [Y/n]' -n 1 -r
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-    echo
-    echo '         Installing Proof General...'
-    echo
-    sudo apt-get install proofgeneral
-    echo
-    echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+  echo
+  echo '         Installing Proof General...'
+  echo
+  sudo apt install -y proofgeneral
+  echo
 else
-    echo ' '
+	echo
+	echo '      ...ok, skipping Proof General setup.'
+	echo
 fi
 echo ' '
-read -p '       6.2 Would you like to install the Coq proof assistant? [Y/n]' -n 1 -r
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-    echo
-    echo '         Installing Coq...'
-    echo
-    sudo apt-get install coq
-    echo
-    echo
+read -p '       6.2 Would you like to install the Lean proof assistant? [Y/n]' -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+  echo
+  echo '         Installing Lean...'
+  echo
+  mkdir -p $HOME/opt
+  mkdir -p $HOME/opt/Lean
+  cd $HOME/opt/Lean
+  wget -N https://leanprover.github.io/lean-nightly/build/lean-nightly-linux.tar.gz
+  tar xvzf lean-nightly-linux.tar.gz
+  ln -sb --suffix='.orig' $HOME/opt/Lean/lean-nightly-linux/bin/lean $HOME/bin/lean
+  echo
+  echo "     ------------------------------------------------"
+  echo "     |   RUN Lean with the command $HOME/bin/lean   |"
+  echo "     ------------------------------------------------"
 else
-    echo ' '
+	echo
+	echo '      ...ok, skipping Lean setup.'
+	echo
 fi
-    echo ' '
-read -p '       6.3 Would you like to install Agda? (Warning: this will take LONG.) [Y/n]' -n 1 -r
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-    echo
-    echo '           Installing Haskell Cabal (required for Agda install)...'
-    echo
-    sudo apt-get install cabal-install zlibc zlib1g-dev ncurses-base libncurses5-dev
-    cabal update
-    echo
-    echo '           Installing Agda...'
-    echo
-    cabal install Agda
-    $HOME/.cabal/bin/agda-mode setup
-    echo
-    echo '           Cloning a couple of Agda libraries from OPLSS 2014...'
-    echo
-    mkdir -p $HOME/git; cd $HOME/git
-    if [ -h $HOME'/git/agda-summer-school' ]; then
+echo ' '
+read -p '       6.3 Would you like to install the Coq proof assistant? [Y/n]' -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+  echo
+  echo '         Installing Coq...'
+  echo
+  sudo apt install -y coq
+  echo
+  echo
+else
 	echo
-	echo '           agda-summer-school repo found; skipping...'
+	echo '      ...ok, skipping Coq setup.'
 	echo
-    else 
-	git clone https://github.com/williamdemeo/agda-summer-school.git
-	# git clone git@github.com:williamdemeo/agda-summer-school.git
-    fi
-    if [ -h $HOME'/git/agda-prelude' ]; then
-	echo
-	echo '           agda-prelude repo found; skipping...'
-	echo
-    else 
-	git clone https://github.com/williamdemeo/agda-prelude.git
-	# git clone git@github.com:williamdemeo/agda-prelude.git
-    fi
-    cd $HOME/git/agda-prelude/agda-ffi
-    cabal install
-    echo
-    echo
 fi
-echo
-echo
 echo
 echo '    Configuration is complete.'
 echo
-echo '    Assuming all went well, the dotfiles.wjd repository has been cloned and'
-echo '    saved at ~/.dotfiles.wjd (and your dot files now link to that directory).'
-echo
-echo '    If you want to use Magit in Emacs, see the instructions at the bottom of'
-echo '    the file ~/.dotfiles.wjd/README.md.'
-echo   
 echo '    You can post comments, questions, or feedback in a comment box at:'
 echo '    http://williamdemeo.org.'
 echo
@@ -309,5 +253,4 @@ echo
 # echo
 # # Install rlwrap to provide libreadline features with node
 # # See: http://nodejs.org/api/repl.html#repl_repl
-# sudo apt-get install -y rlwrap
-
+# sudo apt install -y rlwrap
