@@ -65,6 +65,7 @@ if [ -d $HOME'/bash.d' ]; then
   mv $HOME'/bash.d' $HOME'/bash.d_backup_'$(date +'%Y%m%d:%H:%M')
 fi
 cd $HOME
+sudo apt install -y rlwrap
 wget https://github.com/williamdemeo/utils/raw/master/dotfiles-setup/bash.d.tar.gz
 tar xvzf bash.d.tar.gz
 mv bash.d .bash.d
