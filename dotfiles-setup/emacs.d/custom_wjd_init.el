@@ -92,8 +92,8 @@
 
 
 ;;;; ------ For LEAN ----------------
-(setq lean-rootdir "~/git/PROGRAMMING/LEAN/lean")
-(setq load-path (cons "~/git/PROGRAMMING/LEAN/lean/src/emacs" load-path))
+(setq lean-rootdir "~/git/PROGRAMMING/LEAN/gh/lean")
+(setq load-path (cons "~/git/PROGRAMMING/LEAN/gh/lean/src/emacs" load-path))
 (require 'lean-mode)
 ;;;; --------------------------------
 
