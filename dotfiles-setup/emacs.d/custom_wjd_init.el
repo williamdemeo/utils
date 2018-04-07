@@ -12,8 +12,6 @@
 ;;(load-file "~/opt/ProofGeneral/generic/proof-site.el")
 
 
-
-
 ;; If emacs is started in a new window, that window 
 ;; should be sized appropriately for your screen.
 (defun arrange-frame (w h x y)
@@ -27,13 +25,36 @@
   (arrange-frame 187 48 70 0)  ; <<<< set the w h x y variables here
 )
 
+(require 'gnutls)
+(add-to-list 'gnutls-trustfiles
+             (expand-file-name
+              "~/opt/tls/certificates/comodo.rsa.ca.intermediate.crt"))
+
+;; package.el
 (require 'package)
-(setq package-archives
-      '( ("melpa-stable" . "http://stable.melpa.org/packages/")
-	("melpa"     . "http://melpa.milkbox.net/packages/")
-	("marmalade" . "http://marmalade-repo.org/packages/")
-        ("gnu"       . "http://elpa.gnu.org/packages/")))
+
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives 
+             '("org" . "http://orgmode.org/elpa/") t)
+
 (package-initialize)
+
+;; (require 'package)
+;; (setq package-archives
+;;     '(
+;;         ("melpa" . "https://melpa.org/packages/")
+;; 	("marmalade" . "http://marmalade-repo.org/packages/")
+;;      )
+;; )
+;; ;("melpa-stable" . "http://stable.melpa.org/packages/")
+;; ;("melpa"     . "http://melpa.milkbox.net/packages/")
+;; ;("gnu"       . "http://elpa.gnu.org/packages/")
+;; (when (< emacs-major-version 24)
+;;   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+;; (package-initialize)
 
 ;; (setq package-archives '(
 ;; 			  ("gnu" . "http://elpa.gnu.org/packages/")
@@ -80,8 +101,8 @@
 ;;;;------------------------------
 
 ;;;; ------ For Agda ----------------
- (load-file (let ((coding-system-for-read 'utf-8))
-                 (shell-command-to-string "agda-mode locate")))
+ ;; (load-file (let ((coding-system-for-read 'utf-8))
+ ;;                 (shell-command-to-string "agda-mode locate")))
 ;;;; --------------------------------
 
 
@@ -92,16 +113,18 @@
 
 
 ;;;; ------ For LEAN ----------------
-(setq lean-rootdir "~/git/PROGRAMMING/LEAN/lean")
-(setq load-path (cons "~/git/PROGRAMMING/LEAN/lean/src/emacs" load-path))
+;; (setq lean-rootdir "/usr/local/lib/lean")
+;; (setq load-path (cons "/usr/local/lib" load-path))
+(setq lean-rootdir "~/git/PROGRAMMING/LEAN/gh/lean")
+(setq load-path (cons "~/git/PROGRAMMING/LEAN/gh/lean/src/emacs" load-path))
 (require 'lean-mode)
 ;;;; --------------------------------
 
 
 
 ;;;;--------- For Scala -------------------
-(unless (package-installed-p 'scala-mode2)
-  (package-refresh-contents) (package-install 'scala-mode2))
+;; (unless (package-installed-p 'scala-mode2)
+;;   (package-refresh-contents) (package-install 'scala-mode2))
 ;;;;----------------------------------------------
 
 ;;; uncomment this line to disable loading of "default.el" at startup
@@ -263,9 +286,11 @@
 ;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (require 'color-theme)
 (color-theme-initialize)
-(color-theme-tty-dark)
-;(load-theme 'monokai t)
-;(load-theme 'exu t)
+(color-theme-zenburn)
+;; (color-theme-tty-dark)
+;; (load-theme 'monokai t)
+;; (load-theme 'exu t)
+(load-theme 'zenburn t)
 ;(color-theme-snowish)
 
 ;; Gap
@@ -282,4 +307,8 @@
 (require 'org-journal)
 (custom-set-variables
  '(org-journal-dir "~/git/org/journal/"))
-(require 'ox-reveal)
+;; (require 'ox-reveal)
+
+(setq
+ browse-url-browser-function 'browse-url-generic
+ browse-url-generic-program "google-chrome")
