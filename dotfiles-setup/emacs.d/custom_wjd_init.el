@@ -12,6 +12,8 @@
 ;;(load-file "~/opt/ProofGeneral/generic/proof-site.el")
 
 
+
+
 ;; If emacs is started in a new window, that window 
 ;; should be sized appropriately for your screen.
 (defun arrange-frame (w h x y)
@@ -41,20 +43,6 @@
              '("org" . "http://orgmode.org/elpa/") t)
 
 (package-initialize)
-
-;; (require 'package)
-;; (setq package-archives
-;;     '(
-;;         ("melpa" . "https://melpa.org/packages/")
-;; 	("marmalade" . "http://marmalade-repo.org/packages/")
-;;      )
-;; )
-;; ;("melpa-stable" . "http://stable.melpa.org/packages/")
-;; ;("melpa"     . "http://melpa.milkbox.net/packages/")
-;; ;("gnu"       . "http://elpa.gnu.org/packages/")
-;; (when (< emacs-major-version 24)
-;;   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
-;; (package-initialize)
 
 ;; (setq package-archives '(
 ;; 			  ("gnu" . "http://elpa.gnu.org/packages/")
