@@ -4,7 +4,9 @@
 ; modified [2013.07.23] by <williamdemeo@gmail.com>
 ; modified [2011.01.01] by <williamdemeo@gmail.com>
 
-(setq load-path (cons "~/.emacs.d" load-path))
+(message "Loading custom_wjd_init.el")
+
+;(setq load-path (cons "~/.emacs.d" load-path))
 (scroll-bar-mode -1)
 
 ;; Proof General IDE for Coq
@@ -35,12 +37,12 @@
 ;; package.el
 (require 'package)
 
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
-(add-to-list 'package-archives 
-             '("org" . "http://orgmode.org/elpa/") t)
+;; (add-to-list 'package-archives
+;;              '("marmalade" . "http://marmalade-repo.org/packages/") t)
+;; (add-to-list 'package-archives
+;;              '("melpa" . "http://melpa.org/packages/") t)
+;; (add-to-list 'package-archives 
+;;              '("org" . "http://orgmode.org/elpa/") t)
 
 (package-initialize)
 
@@ -254,31 +256,30 @@
 ; Set font
 ;(set-default-font "Inconsolata-12")
 
-(require 'color-theme)
-  (setq my-color-themes (list 'color-theme-billw 'color-theme-jsc-dark 
-                              'color-theme-sitaramv-solaris 'color-theme-resolve
-                              'color-theme-classic 'color-theme-jonadabian-slate
-                              'color-theme-kingsajz 'color-theme-shaman
-                              'color-theme-subtle-blue 'color-theme-snowish
-                              'color-theme-sitaramv-nt 'color-theme-wheat
-			      'color-theme-adwaita 'color-theme-deeper-blue 
-			      'color-theme-dichromacy 'color-theme-ir-black 
-			      'color-theme-light-blue 'color-theme-manoj-dark
-			      'color-theme-misterioso 
-			      'color-theme-moe 'color-theme-moe-dark 'color-theme-moe-light 
-			      'color-theme-tango 'color-theme-tango-dark
-			      'color-theme-tsdh-dark 'color-theme-tsdh-light 
-			      'color-theme-wheatgrass 'color-theme-whiteboard 
-			      'color-theme-wombat 'color-theme-zenburn))
+;; (require 'color-theme)
+;;   (setq my-color-themes (list 'color-theme-billw 'color-theme-jsc-dark 
+;;                               'color-theme-sitaramv-solaris 'color-theme-resolve
+;;                               'color-theme-classic 'color-theme-jonadabian-slate
+;;                               'color-theme-kingsajz 'color-theme-shaman
+;;                               'color-theme-subtle-blue 'color-theme-snowish
+;;                               'color-theme-sitaramv-nt 'color-theme-wheat
+;; 			      'color-theme-adwaita 'color-theme-deeper-blue 
+;; 			      'color-theme-dichromacy 'color-theme-ir-black 
+;; 			      'color-theme-light-blue 'color-theme-manoj-dark
+;; 			      'color-theme-misterioso 
+;; 			      'color-theme-moe 'color-theme-moe-dark 'color-theme-moe-light 
+;; 			      'color-theme-tango 'color-theme-tango-dark
+;; 			      'color-theme-tsdh-dark 'color-theme-tsdh-light 
+;; 			      'color-theme-wheatgrass 'color-theme-whiteboard 
+;; 			      'color-theme-wombat 'color-theme-zenburn))
 ; Load theme
 ;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(require 'color-theme)
-(color-theme-initialize)
-(color-theme-zenburn)
+;; (color-theme-initialize)
+;; (color-theme-zenburn)
 ;; (color-theme-tty-dark)
 ;; (load-theme 'monokai t)
 ;; (load-theme 'exu t)
-(load-theme 'zenburn t)
+;; (load-theme 'zenburn t)
 ;(color-theme-snowish)
 
 ;; Gap
