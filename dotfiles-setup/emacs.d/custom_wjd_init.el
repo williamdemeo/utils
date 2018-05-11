@@ -106,7 +106,7 @@
 ;; (setq lean-rootdir "/usr/local/lib/lean")
 ;; (setq load-path (cons "/usr/local/lib" load-path))
 (setq lean-rootdir "~/git/PROGRAMMING/LEAN/gh/lean")
-(setq load-path (cons "~/git/PROGRAMMING/LEAN/gh/lean/src/emacs" load-path))
+;(setq load-path (cons "~/git/PROGRAMMING/LEAN/gh/lean/src/emacs" load-path))
 (require 'lean-mode)
 ;;;; --------------------------------
 
