@@ -165,7 +165,7 @@ check the box next to `auto-save-session`
 | Chrome   | web browser | https://www.google.com/chrome |
 | IntelliJ IDEA | IDE I use for Scala programming | https://www.jetbrains.com/idea/download |
 | Lean     | Interactive theorem prover and fp lang | https://leanprover.github.io |
-| VS Code | IDE I sometimes use for Lean | 
+| VS Code | IDE I sometimes use for Lean | https://code.visualstudio.com/ |
 
 
 1. **atom**
@@ -203,6 +203,24 @@ check the box next to `auto-save-session`
 	cmace ../../src
 	make
 	
+5. *VS Code* and *vscode-lean*
+
+   First, go to https://code.visualstudio.com/  and download the vscode .deb file.
+
+   Next, clone the `vscode-lean` repository with either 
+   `git clone git@github.com:leanprover/vscode-lean.git`
+   or 
+   `git clone https://github.com/leanprover/vscode-lean`
+
+   Then invoke the following at the command prompt of a terminal window:
+
+   ```sh
+   sudo dpkg -i code*.deb    # (installs vscode)
+   sudo apt install npm      # (installs node package manager)
+   cd $HOME/git/vscode-lean
+   npm install
+   ```
+   Finally, open `vscode-lean` in vscode and start developing (F5 starts the debugger).
 
 
 ---
@@ -250,3 +268,6 @@ check the box next to `auto-save-session`
   And then run `sudo update-grub`
 
 
+---
+
+## Install vscode-lean
