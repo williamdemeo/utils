@@ -1,14 +1,14 @@
 # Linux on Lenovo X1 Yoga Gen 3
 
-This page describes some of the steps I took to install and configure Ubuntu 
-Linux 18.04 on a Lenovo X1 Yoga (3rd Generation) laptop. 
+This page describes some of the steps I took to install and configure Ubuntu
+Linux 18.04 on a Lenovo X1 Yoga (3rd Generation) laptop.
 
-**This information is for my own reference.** 
+**This information is for my own reference.**
 I am posting this information here just in case I forget how to do any of this
 next time I configure a machine.
 
-**Disclaimer.** If you make use of the information on this page, then you do 
-so at your own risk.  I am not responsible for any damages or injuries sustained 
+**Disclaimer.** If you make use of the information on this page, then you do
+so at your own risk.  I am not responsible for any damages or injuries sustained
 as a result of following the instructions below.
 
 ## Installing Ubuntu 18.04 alongside Windows 10
@@ -17,11 +17,11 @@ We want to make sure Windows doesn't prevent us from booting off a usb drive.
 
 1. As suggested
    [here](https://www.tecmint.com/install-ubuntu-16-04-alongside-with-windows-10-or-8-in-dual-boot/),
-   modify the EFI BIOS settings and disable "Secure Boot" feature.  This 
-   setting is found in the "Security > Secure Boot" menu of the BIOS 
-   configuration program.  
+   modify the EFI BIOS settings and disable "Secure Boot" feature.  This
+   setting is found in the "Security > Secure Boot" menu of the BIOS
+   configuration program.
 
-2. In the "Startup" BIOS menu item, 
+2. In the "Startup" BIOS menu item,
    - set the "UEFI/Legacy Boot" option to "Both"
    - set the "Boot Mode" option to "Diagnostics"
 
@@ -34,33 +34,34 @@ We want to make sure Windows doesn't prevent us from booting off a usb drive.
 
 ## Things to do after installing ubuntu
 
-This section describes how to implement the specific configuration and 
+This section describes how to implement the specific configuration and
 customizations that I like.
 
 ## upgrade installed packages
 
-    sudo apt update
-    sudo apt upgrade
-    
+```sh
+sudo apt update
+sudo apt upgrade
+```
+
 ---
 
 ## Generate ssh keys
 
 Generate ssh keys and and post the public key on your github and
-bitbucket account pages. 
+bitbucket account pages.
 
-    ssh-keygen
-    # Hit Enter (to select default filename)
-    # Hit Enter (to select empty passphrase)
-    # Hit Enter (to confirm empty passphrase)
+```
+ssh-keygen
+# Hit Enter (to select default filename)
+# Hit Enter twice (to select/confirm empty passphrase)
+cat $HOME/.ssh/id_rsa.pub
+```
 
-    cat $HOME/.ssh/id_rsa.pub
-    
-Then copy all of the output that the previous command displays
-including `ssh-rsa` and your `usename@hostname` and past this into the
-input windows on the ssh keys pages at github and bitbucket. (Go to 
-Github.com and bitbucket.org and login to each site and find 
-`Settings -> SSH`.)
+Copy all of the output that the previous command produces including
+`ssh-rsa` and your `usename@hostname` and past it into the input windows
+on the "ssh keys" pages at github and bitbucket. (Login to account
+at github.com and bitbucket.org and find the `Settings -> SSH` page.)
 
 ---
 
@@ -70,9 +71,9 @@ Github.com and bitbucket.org and login to each site and find
 1. Hit Windows key, then type `settings` and hit Enter.
 
 2. In the "Devices > Displays" section, select the desired resolution
-and scale. 
+and scale.
 
-(**todo**: figure out how to get other scales besides 100, 200, 300)
+(**Todo**: figure out how to get other scales besides 100, 200, 300)
 
 ---
 
@@ -100,16 +101,17 @@ to OFF.
 
 1. Install `gnome-tweak-tool` with the command
 
-        sudo apt install gnome-tweak-tool
-    
+   ```sh
+   sudo apt install gnome-tweak-tool
+   ```
+
 2. Launch gnome-tweak-tool by typing `gnome-tweaks` at the command
 prompt.
 
-3. In the "Keyboard & Mouse" section, set "Emacs Input" to ON.
-
-4. In the "Keyboard & Mouse section", select "Additional Layout Options"
-button, click the arrow next to "Caps Lock behavior" and select "Caps
-Lock is also a Ctrl"
+3. In the "Keyboard & Mouse" section,
+   - set "Emacs Input" to ON.
+   - select the "Additional Layout Options" button, click the arrow next
+     to "Caps Lock behavior" and select "Caps Lock is also a Ctrl"
 
 ---
 
@@ -126,11 +128,11 @@ Date" to ON.
 ## install some additional software from command line
 
 The following is a list of apps I install from the command line using
-`sudo apt install <name of package>`  
+`sudo apt install <name of package>`
 
 (The command used to install all packages at once appears below.)
 
-| Name  | Description                      | 
+| Name  | Description                      |
 | ---   | ---                              |
 | emacs | GNU Emacs editor (metapackage) |
 | git   | fast, scalable, distributed revision control system |
@@ -150,45 +152,52 @@ The following is a list of apps I install from the command line using
 | texlive-science           | TeX Live: Mathematics, natural sciences, computer science packages|
 | texlive-xetex             | TeX Live: XeTeX and packages |
 
-To install all of these, at the command prompt enter:
+To install all of these at once, copy-and-paste the following into a terminal window:
 
-    sudo apt install emacs git jed nemo build-essential cmake dconf-tools pm-utils \
-    texlive texlive-latex-extra texlive-xetex texlive-science texlive-latex-recommended \ 
-    texlive-publishers texlive-generic-extra texlive-bibtex-extra
+```sh
+sudo apt install emacs git jed nemo build-essential cmake dconf-tools pm-utils \
+texlive texlive-latex-extra texlive-xetex texlive-science texlive-latex-recommended \
+texlive-publishers texlive-generic-extra texlive-bibtex-extra
+```
 
 After installing the above, `apt` recommended installing more
 packages, which I did as follows:
 
-    sudo apt install tcl-tclreadline python-pygments icc-profiles libfile-which-perl libspreadsheet-parseexcel-perl \
-    texlive-latex-extra-doc dot2tex prerex ruby-tcltk libtcltk-ruby texlive-pictures-doc vprerex \
-    texlive-publishers-doc texlive-science-doc
-    
+```sh
+sudo apt install tcl-tclreadline python-pygments icc-profiles libfile-which-perl libspreadsheet-parseexcel-perl \
+texlive-latex-extra-doc dot2tex prerex texlive-pictures-doc vprerex texlive-publishers-doc texlive-science-doc
+```
 View a brief description of these packages with the command:
 
-    dpkg -l tcl-tclreadline python-pygments icc-profiles libfile-which-perl libspreadsheet-parseexcel-perl \
-    texlive-latex-extra-doc dot2tex prerex ruby-tcltk libtcltk-ruby texlive-pictures-doc vprerex \
-    texlive-publishers-doc texlive-science-doc
+```sh
+dpkg -l tcl-tclreadline python-pygments icc-profiles libfile-which-perl libspreadsheet-parseexcel-perl \
+texlive-latex-extra-doc dot2tex prerex texlive-pictures-doc vprerex texlive-publishers-doc texlive-science-doc
+```
 
 ---
 
 ## restore running apps upon reboot
 
-Install `dconf-editor` 
+(Here's what I tried, but this doesn't seem to work yet.)
 
-    sudo apt install dconf-tools
-    dconf-editor
-    
+Install `dconf-tools`
+
+```sh
+sudo apt install dconf-tools
+```
+
+Then run the command `dconf-editor`
+
 When dconf-editor starts, select org > gnome > gnome-session, then
 check the box next to `auto-save-session`
 
-(this doesn't seem to work)
 
 ---
 
 ## install some additional software directly from source or binaries
 
 | App Name | Description                      |  url |
-| ---      | ---                              | ---  | 
+| ---      | ---                              | ---  |
 | atom     | modern extensible editor         | https://atom .io |
 | Chrome   | web browser | https://www.google.com/chrome |
 | IntelliJ IDEA | IDE I use for Scala programming | https://www.jetbrains.com/idea/download |
@@ -209,46 +218,73 @@ check the box next to `auto-save-session`
    academic status, and get a license to use the full version for free.
    Download the file `ideaIU-2018.1.4.tar.gz` (or similar) and extract it.
 
-        tar xvzf ideaIU-2018.1.4.tar.gz
-        mkdir -p $HOME/bin
-        ln -s $HOME/opt/IntelliJ/idea-IU-181.5087.20/bin/idea.sh $HOME/bin/idea
-    
-   Then make sure $HOME/bin is in your search $PATH; e.g., input
+   ```sh
+   tar xvzf ideaIU-2018.1.4.tar.gz
+   mkdir -p $HOME/bin
+   ln -s $HOME/opt/IntelliJ/idea-IU-181.5087.20/bin/idea.sh $HOME/bin/idea
+   ```
 
-        export PATH="$HOME/bin":$PATH
-    
-   at the command line, and in your `$HOME/.bash_profile` file.
-
-4. *Lean*
-
-        sudo apt install git libgmp-dev cmake
-	mkdir -p $HOME/git/PROGRAMMING/LEAN
-        cd $HOME/git/PROGRAMMING/LEAN
-        git clone git@github.com:leanprover/lean.git
-        cd lean
-	mkdir -p build/release
-	cd build/release
-	cmace ../../src
-	make
-	
-5. *VS Code* and *vscode-lean*
-
-   First, go to https://code.visualstudio.com/  and download the vscode .deb file.
-
-   Next, clone the `vscode-lean` repository with either 
-   `git clone git@github.com:leanprover/vscode-lean.git`
-   or 
-   `git clone https://github.com/leanprover/vscode-lean`
-
-   Then invoke the following at the command prompt of a terminal window:
+   Then make sure `$HOME/bin` is in your search `$PATH`; e.g., input
 
    ```sh
-   sudo dpkg -i code*.deb    # (installs vscode)
-   sudo apt install npm      # (installs node package manager)
-   cd $HOME/git/vscode-lean
-   npm install
+   export PATH="$HOME/bin":$PATH
    ```
-   Finally, open `vscode-lean` in vscode and start developing (F5 starts the debugger).
+
+   at the command line, and also put this line in your `$HOME/.bash_profile`
+   file to make it permanent.
+
+4. **Lean**
+
+   **Warning:** Installing Lean from source takes quite a while, say, 30 minutes.
+   If you're not sure whether you need to compile Lean, consider trying the
+   [precompiled binaries](https://leanprover.github.io/download/).
+
+   ```sh
+   sudo apt install git libgmp-dev cmake
+   mkdir -p $HOME/git/PROGRAMMING/LEAN
+   cd $HOME/git/PROGRAMMING/LEAN
+   git clone git@github.com:leanprover/lean.git
+   ```
+
+   ```sh
+   cd lean
+   mkdir -p build/release
+   cd build/release
+   cmake ../../src
+   make
+   ```
+
+5. **VS Code** and **vscode-lean**
+
+   - Go to https://code.visualstudio.com/  and download the vscode .deb file.
+   Once download finishes, open a terminal window, go to the directory where you
+   downloaded the vscode .deb file, and install it with the command
+   `sudo dpkg -i code_*.deb`.
+
+   - Next, clone the `vscode-lean` repository with either
+
+     ```sh
+     mkdir -p $HOME/git; cd !$
+     git clone git@github.com:leanprover/vscode-lean.git`
+     ```
+
+     or
+
+     ```sh
+     mkdir -p $HOME/git; cd !$
+     git clone https://github.com/leanprover/vscode-lean`
+     ```
+
+   - Next, invoke the following:
+
+     ```sh
+     sudo apt install npm      # (installs node package manager)
+     cd $HOME/git/vscode-lean
+     npm install
+     ```
+
+   - Finally, launch vscode by entering `code` on the command line, then open
+     `vscode-lean` and start developing (F5 starts the debugger).
 
 
 ---
@@ -257,10 +293,10 @@ check the box next to `auto-save-session`
 
 ### Remove some "favorites" icons
 
-1. Rhythm Box  
+1. Rhythm Box
    rightclick on the Rhythm Box launcher icon and select "remove from favorites"
 
-2. Ubuntu Software  
+2. Ubuntu Software
    rightclick on the Software installer icon and select "remove from favorites"
 
 
@@ -283,19 +319,21 @@ check the box next to `auto-save-session`
 
 ## Fix Lenovo X1Y3 wake-from-suspend problem
 
-- Enable Thunderbolt 3 compatibility mode in the BIOS
+**WARNING:** The steps below bricked my machine.  Do not follow these steps!!!
+(I'm leaving these steps posted here as a reminder, in case some other website
+suggests them, these steps can be fatal.  Do not proceed!!!)
 
-- Disable internal card reader in BIOS (under security settings)
+**Do NOT do the following!!!**
+You have been warned.
 
-- Add kernel flag: acpi.ec_no_wakeup=1
-  
-  Do this by adding the following line to the file `/etc/default/grub`
-  
+- (DO NOT) Enable Thunderbolt 3 compatibility mode in the BIOS
+
+- (DO NOT) Disable internal card reader in BIOS (under security settings)
+
+- (DO NOT) Add kernel flag: acpi.ec_no_wakeup=1
+
+  (DO NOT) Do this by adding the following line to the file `/etc/default/grub`
+
         GRUB_CMDLINE_LUNUX="acpi.ec_no_wakeup=1"
-  
-  And then run `sudo update-grub`
 
-
----
-
-## Install vscode-lean
+  And then (DO NOT) run `sudo update-grub`
