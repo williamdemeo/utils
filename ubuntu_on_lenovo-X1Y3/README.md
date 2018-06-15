@@ -264,14 +264,14 @@ check the box next to `auto-save-session`
    - Next, clone the `vscode-lean` repository with either
 
      ```sh
-     mkdir -p $HOME/git; cd !$
+     mkdir -p $HOME/git; cd $HOME/git
      git clone git@github.com:leanprover/vscode-lean.git`
      ```
 
      or
 
      ```sh
-     mkdir -p $HOME/git; cd !$
+     mkdir -p $HOME/git; cd $HOME/git
      git clone https://github.com/leanprover/vscode-lean`
      ```
 
