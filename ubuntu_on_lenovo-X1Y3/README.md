@@ -198,17 +198,28 @@ check the box next to `auto-save-session`
 
 | App Name | Description                      |  url |
 | ---      | ---                              | ---  |
-| atom     | modern extensible editor         | https://atom .io |
+| MEGAsync | synch between computer and MEGA cloud storage account | http://mega.nz |
+| atom     | modern extensible editor         | https://atom.io |
 | Chrome   | web browser | https://www.google.com/chrome |
 | IntelliJ IDEA | IDE I use for Scala programming | https://www.jetbrains.com/idea/download |
 | Lean     | Interactive theorem prover and fp lang | https://leanprover.github.io |
 | VS Code | IDE I sometimes use for Lean | https://code.visualstudio.com/ |
 
 
+0. **MEGAsync** Go to http://mega.nz and use the hamburger menu on the right to select
+   "Apps" > "sync client" and download the appropriate .deb package. Once the download
+   finishes, click on the downloaded file and you should be asked whether to open
+   the file with the Ubuntu App Installer.  Select "yes" and install MEGAsync.
+   Alternatively, enter `sudo dpkg -i megasync*.deb` on the command line. Finally, launch
+   the Megasync program and start syncing!
+
 1. **atom**
 
-   Go to https://atom.io and download `atom-amd64.deb`.  Once download
-   finishes, enter `sudo dpkg -i atom-amd64.deb` on the command line.
+   Go to https://atom.io and download `atom-amd64.deb`.  Once the download
+   finishes, click on the downloaded file and you should be asked whether to open
+   the file with the Ubuntu App Installer.  Select "yes" and install Atom.
+   Alternatively, enter `sudo dpkg -i atom-*.deb` on the command line. Finally, launch
+   Atom from the command line with the command `atom &` and start editing!
 
 2. **Chrome** (see instructions for atom, except use https://www.google.com/chrome)
 
@@ -219,7 +230,7 @@ check the box next to `auto-save-session`
    Download the file `ideaIU-2018.1.4.tar.gz` (or similar) and extract it.
 
    ```sh
-   tar xvzf ideaIU-2018.1.4.tar.gz
+   tar xvzf ideaIU-*.gz
    mkdir -p $HOME/bin
    ln -s $HOME/opt/IntelliJ/idea-IU-181.5087.20/bin/idea.sh $HOME/bin/idea
    ```
@@ -265,20 +276,25 @@ check the box next to `auto-save-session`
 
      ```sh
      mkdir -p $HOME/git; cd $HOME/git
-     git clone git@github.com:leanprover/vscode-lean.git`
+     git clone git@github.com:leanprover/vscode-lean.git
      ```
 
      or
 
      ```sh
      mkdir -p $HOME/git; cd $HOME/git
-     git clone https://github.com/leanprover/vscode-lean`
+     git clone https://github.com/leanprover/vscode-lean
      ```
 
-   - Next, invoke the following:
+   - Next, install the node package manager.
 
      ```sh
-     sudo apt install npm      # (installs node package manager)
+     sudo apt install npm
+     ```
+
+   - Next, install `vscode-lean`.
+
+     ```sh
      cd $HOME/git/vscode-lean
      npm install
      ```
