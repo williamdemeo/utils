@@ -1,13 +1,41 @@
-# Things I do after installing ubuntu
+# Linux on Lenovo X1 Yoga Gen 3
 
-The sections below describe how I like to configure a new ubuntu
-installation.  This is mainly for my own reference, so I remember how
-to do all these things next time.
+This page describes some of the steps I took to install and configure Ubuntu 
+Linux 18.04 on a Lenovo X1 Yoga (3rd Generation) laptop. 
 
-The information here is accurate as of Ubuntu 18.04, newly installed on May 29, 2018.
+**This information is for my own reference.** 
+I am posting this information here just in case I forget how to do any of this
+next time I configure a machine.
 
-**Disclaimer.** Use this information at your own risk.
+**Disclaimer.** If you make use of the information on this page, then you do 
+so at your own risk.  I am not responsible for any damages or injuries sustained 
+as a result of following the instructions below.
 
+## Installing Ubuntu 18.04 alongside Windows 10
+Hit `Enter` when the Lenovo splash screen appears to enter the BIOS setup utility.
+We want to make sure Windows doesn't prevent us from booting off a usb drive.
+
+1. As suggested
+   [here](https://www.tecmint.com/install-ubuntu-16-04-alongside-with-windows-10-or-8-in-dual-boot/),
+   modify the EFI BIOS settings and disable "Secure Boot" feature.  This 
+   setting is found in the "Security > Secure Boot" menu of the BIOS 
+   configuration program.  
+
+2. In the "Startup" BIOS menu item, 
+   - set the "UEFI/Legacy Boot" option to "Both"
+   - set the "Boot Mode" option to "Diagnostics"
+
+3. Boot into Windows, and follow the repartitioning instructions given at
+   https://www.tecmint.com/install-ubuntu-16-04-alongside-with-windows-10-or-8-in-dual-boot/
+
+(**Todo:** complete this section)
+
+---
+
+## Things to do after installing ubuntu
+
+This section describes how to implement the specific configuration and 
+customizations that I like.
 
 ## upgrade installed packages
 
@@ -37,7 +65,7 @@ Github.com and bitbucket.org and login to each site and find
 ---
 
 
-## fix display resolution and zoon
+## fix display resolution and zoom
 
 1. Hit Windows key, then type `settings` and hit Enter.
 
