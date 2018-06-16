@@ -12,23 +12,31 @@ so at your own risk.  I am not responsible for any damages or injuries sustained
 as a result of following the instructions below.
 
 ## Installing Ubuntu 18.04 alongside Windows 10
-Hit `Enter` when the Lenovo splash screen appears to enter the BIOS setup utility.
-We want to make sure Windows doesn't prevent us from booting off a usb drive.
 
-1. As suggested
+1. Download Ubuntu and make a startup iso image on a blank usb drive.
+   (Use a utility like the Ubuntu Startup Disk Creator app.)
+
+2. Boot the laptop and hit `Enter` when the Lenovo splash screen appears to
+   enter the BIOS setup utility. (Be very careful to not change too many BIOS settings.  You can brick the machine if you mess around too much with the BIOS.)
+
+3. As suggested
    [here](https://www.tecmint.com/install-ubuntu-16-04-alongside-with-windows-10-or-8-in-dual-boot/),
    modify the EFI BIOS settings and disable "Secure Boot" feature.  This
    setting is found in the "Security > Secure Boot" menu of the BIOS
    configuration program.
 
-2. In the "Startup" BIOS menu item,
+4. In the "Startup" BIOS menu item,
    - set the "UEFI/Legacy Boot" option to "Both"
    - set the "Boot Mode" option to "Diagnostics"
 
-3. Boot into Windows, and follow the repartitioning instructions given at
+5. Boot into Windows, and follow the repartitioning instructions given at
    https://www.tecmint.com/install-ubuntu-16-04-alongside-with-windows-10-or-8-in-dual-boot/
 
-(**Todo:** complete this section)
+(**Todo:** fill in more details)
+
+### Installation of Ubuntu 18.04
+
+When prompted for the type of installation, be sure to choose the **minimal** option to avoid installing too much bloatware.
 
 ---
 
@@ -37,7 +45,26 @@ We want to make sure Windows doesn't prevent us from booting off a usb drive.
 This section describes how to implement the specific configuration and
 customizations that I like.
 
-## upgrade installed packages
+### fix display resolution and zoom
+
+The resolution on the latest X1s can reach 2560x1440, which is incredibly hight for a 14"-diagonal screen.  As a result, upon login, the window manager defaults to 200% zoom, which makes everything appear too big, as if the machine has pathetically low resolution.
+
+On the other hand, 100% zoom (i.e., no zoom) requires a very good pair of eyes or a very good pair of binoculars (or both) to see what's on the screen.  To solve this, set the zoom to 100% and then use the command line to achieve a comfortable fractional zoom level of, say, 140% (i.e., 1.4 zoom factor), as follows:
+
+1. Hit Windows key, then type `settings` and hit Enter.
+
+2. In the "Devices > Displays" section, set the zoom level to 100% (no zoom).
+
+3. If everything is too small (but too big at 200% zoom), then invoke the
+   following command to obtain a 1.4x zoom factor:
+
+   ```sh
+   gsettings set org.gnome.desktop.interface text-scaling-factor 1.4
+   ```
+
+---
+
+### upgrade installed packages
 
 ```sh
 sudo apt update
@@ -46,7 +73,7 @@ sudo apt upgrade
 
 ---
 
-## Generate ssh keys
+### generate ssh keys
 
 Generate ssh keys and and post the public key on your github and
 bitbucket account pages.
@@ -66,18 +93,8 @@ at github.com and bitbucket.org and find the `Settings -> SSH` page.)
 ---
 
 
-## fix display resolution and zoom
 
-1. Hit Windows key, then type `settings` and hit Enter.
-
-2. In the "Devices > Displays" section, select the desired resolution
-and scale.
-
-(**Todo**: figure out how to get other scales besides 100, 200, 300)
-
----
-
-## fix window-toggling, mouse scroll direction, key repeat speed
+### fix window-toggling, mouse scroll direction, key repeat speed
 
 1. Hit Windows key, then type `settings` and hit Enter.
 
@@ -97,7 +114,7 @@ to OFF.
 
 ---
 
-## enable emacs style shortcuts, make Caps-Lock a Ctrl key, etc.
+### enable emacs style shortcuts, make Caps-Lock a Ctrl key, etc.
 
 1. Install `gnome-tweak-tool` with the command
 
@@ -115,7 +132,7 @@ prompt.
 
 ---
 
-## add Top Bar information
+### add Top Bar information
 
 1. Launch gnome-tweak-tool by typing `gnome-tweaks` at the command
 prompt.
@@ -125,7 +142,7 @@ Date" to ON.
 
 ---
 
-## install some additional software from command line
+### install some additional software from command line
 
 The following is a list of apps I install from the command line using
 `sudo apt install <name of package>`
@@ -174,27 +191,10 @@ dpkg -l tcl-tclreadline python-pygments icc-profiles libfile-which-perl libsprea
 texlive-latex-extra-doc dot2tex prerex texlive-pictures-doc vprerex texlive-publishers-doc texlive-science-doc
 ```
 
----
-
-## restore running apps upon reboot
-
-(Here's what I tried, but this doesn't seem to work yet.)
-
-Install `dconf-tools`
-
-```sh
-sudo apt install dconf-tools
-```
-
-Then run the command `dconf-editor`
-
-When dconf-editor starts, select org > gnome > gnome-session, then
-check the box next to `auto-save-session`
-
 
 ---
 
-## install some additional software directly from source or binaries
+### install some additional software directly from source or binaries
 
 | App Name | Description                      |  url |
 | ---      | ---                              | ---  |
@@ -305,9 +305,11 @@ check the box next to `auto-save-session`
 
 ---
 
-## Remove some bloatware
+### remove some bloatware
 
-### Remove some "favorites" icons
+The steps in this section are probably unecessary if you select a **minimal**  installation when installing ubuntu.
+
+#### remove some "favorites" icons
 
 1. Rhythm Box
    rightclick on the Rhythm Box launcher icon and select "remove from favorites"
@@ -316,7 +318,7 @@ check the box next to `auto-save-session`
    rightclick on the Software installer icon and select "remove from favorites"
 
 
-### Uninstall some "favorites" apps
+#### uninstall some "favorites" apps
 
 + Amazon
   1. rightclick on the Amazon launcher icon and select "show details"
@@ -333,14 +335,37 @@ check the box next to `auto-save-session`
 
 ---
 
-## Fix Lenovo X1Y3 wake-from-suspend problem
+## Stuff that doesn't work yet
+
+This sections mentions some of the issues I haven't been able to resolve yet.
+
+### restore running apps upon reboot  (unsuccessful)
+
+(Here's what I tried, but this doesn't seem to work yet.)
+
+Install `dconf-tools`
+
+```sh
+sudo apt install dconf-tools
+```
+
+Then run the command `dconf-editor`
+
+When dconf-editor starts, select org > gnome > gnome-session, then
+check the box next to `auto-save-session`
+
+
+
+### fix Lenovo X1Y3 wake-from-suspend problem (unsuccessful)
 
 **WARNING:** The steps below bricked my machine.  Do not follow these steps!!!
 (I'm leaving these steps posted here as a reminder, in case some other website
 suggests them, these steps can be fatal.  Do not proceed!!!)
 
+Below is how I tried to fix the weird mouse behaviour observed after waking from suspend, but the consequences of this attempt were disasterous.  **Do not follow the steps in this section!**
+
 **Do NOT do the following!!!**
-You have been warned.
+(You have been warned.)
 
 - (DO NOT) Enable Thunderbolt 3 compatibility mode in the BIOS
 
