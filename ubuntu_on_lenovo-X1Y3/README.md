@@ -152,6 +152,9 @@ The following is a list of apps I install from the command line using
 | Name  | Description                      |
 | ---   | ---                              |
 | emacs | GNU Emacs editor (metapackage) |
+| coq | the Coq proof assistant |
+| proofgeneral | a generic frontend (IDE) for proof assistants |
+| prooftree | proof-tree visualization for Proof General |
 | git   | fast, scalable, distributed revision control system |
 | jed   | editor for programmers (textmode version) |
 | nemo  | File manager and graphical shell for Cinnamon |
@@ -172,7 +175,7 @@ The following is a list of apps I install from the command line using
 To install all of these at once, copy-and-paste the following into a terminal window:
 
 ```sh
-sudo apt install emacs git jed nemo build-essential cmake dconf-tools pm-utils \
+sudo apt install emacs coq proofgeneral prooftree git jed nemo build-essential cmake dconf-tools pm-utils \
 texlive texlive-latex-extra texlive-xetex texlive-science texlive-latex-recommended \
 texlive-publishers texlive-generic-extra texlive-bibtex-extra
 ```
@@ -191,6 +194,13 @@ dpkg -l tcl-tclreadline python-pygments icc-profiles libfile-which-perl libsprea
 texlive-latex-extra-doc dot2tex prerex texlive-pictures-doc vprerex texlive-publishers-doc texlive-science-doc
 ```
 
+### install some add-on packages to the emacs editor
+
+Launch emacs and invoke `M-x package-list-packages`.  From the list, choose to install the following:
++ magit
++ org
++ org-journal
++
 
 ---
 
@@ -302,6 +312,20 @@ texlive-latex-extra-doc dot2tex prerex texlive-pictures-doc vprerex texlive-publ
    - Finally, launch vscode by entering `code` on the command line, then open
      `vscode-lean` and start developing (F5 starts the debugger).
 
+---
+
+### install some add-on packages to the atom editor
+
+Launch Atom by typing `atom&` at the command line.  Select "Edit > Preferences" from the menu,
+then select "+Install".  Search for and install the following:
+
++ git-plus
++ git-control
++ tree-view-git-status
++ language-latex
++ language-markdown
++ markdown-preview-plus
++ markdown-toc
 
 ---
 
@@ -362,7 +386,9 @@ check the box next to `auto-save-session`
 (I'm leaving these steps posted here as a reminder, in case some other website
 suggests them, these steps can be fatal.  Do not proceed!!!)
 
-Below is how I tried to fix the weird mouse behaviour observed after waking from suspend, but the consequences of this attempt were disasterous.  **Do not follow the steps in this section!**
+Below is how I tried to fix the weird mouse behaviour observed after waking from suspend, but the consequences of this attempt were disasterous.
+
+**Do not follow the steps in this section!**
 
 **Do NOT do the following!!!**
 (You have been warned.)

@@ -1,12 +1,10 @@
-; custom.el
+l; custom.el
 ;
 ; Emacs customization file
 ; modified [2013.07.23] by <williamdemeo@gmail.com>
 ; modified [2011.01.01] by <williamdemeo@gmail.com>
 
-(message "Loading custom_wjd_init.el")
-
-;(setq load-path (cons "~/.emacs.d" load-path))
+(setq load-path (cons "~/.emacs.d" load-path))
 (scroll-bar-mode -1)
 
 ;; Proof General IDE for Coq
@@ -29,21 +27,12 @@
   (arrange-frame 187 48 70 0)  ; <<<< set the w h x y variables here
 )
 
-(require 'gnutls)
-(add-to-list 'gnutls-trustfiles
-             (expand-file-name
-              "~/opt/tls/certificates/comodo.rsa.ca.intermediate.crt"))
-
-;; package.el
 (require 'package)
-
-;; (add-to-list 'package-archives
-;;              '("marmalade" . "http://marmalade-repo.org/packages/") t)
-;; (add-to-list 'package-archives
-;;              '("melpa" . "http://melpa.org/packages/") t)
-;; (add-to-list 'package-archives 
-;;              '("org" . "http://orgmode.org/elpa/") t)
-
+(setq package-archives
+      '( ("melpa-stable" . "http://stable.melpa.org/packages/")
+	("melpa"     . "http://melpa.milkbox.net/packages/")
+	("marmalade" . "http://marmalade-repo.org/packages/")
+        ("gnu"       . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
 ;; (setq package-archives '(
@@ -85,14 +74,14 @@
 (add-hook 'haskell-mode-hook 'intero-mode)
 
 ;; Tidal cycles
-(add-to-list 'load-path "~/git/TEAMS/TypeFunc/gh/uh-mfc/haskelltalk/") ;; Look for tidal.el in ~/uh-mfc/haskelltalk/
-(require 'tidal)
-(setq tidal-interpreter "~/git/TEAMS/TypeFunc/gh/uh-mfc/haskelltalk/ghciscript")
+;; (add-to-list 'load-path "~/git/TEAMS/TypeFunc/gh/uh-mfc/haskelltalk/") ;; Look for tidal.el in ~/uh-mfc/haskelltalk/
+;; (require 'tidal)
+;; (setq tidal-interpreter "~/git/TEAMS/TypeFunc/gh/uh-mfc/haskelltalk/ghciscript")
 ;;;;------------------------------
 
 ;;;; ------ For Agda ----------------
- ;; (load-file (let ((coding-system-for-read 'utf-8))
- ;;                 (shell-command-to-string "agda-mode locate")))
+;;  (load-file (let ((coding-system-for-read 'utf-8))
+;;                 (shell-command-to-string "agda-mode locate")))
 ;;;; --------------------------------
 
 
@@ -103,18 +92,16 @@
 
 
 ;;;; ------ For LEAN ----------------
-;; (setq lean-rootdir "/usr/local/lib/lean")
-;; (setq load-path (cons "/usr/local/lib" load-path))
-(setq lean-rootdir "~/git/PROGRAMMING/LEAN/gh/lean")
-;(setq load-path (cons "~/git/PROGRAMMING/LEAN/gh/lean/src/emacs" load-path))
+(setq lean-rootdir "~/git/PROGRAMMING/LEAN/lean")
+;;(setq load-path (cons "~/git/PROGRAMMING/LEAN/lean/src/emacs" load-path))
 (require 'lean-mode)
 ;;;; --------------------------------
 
 
 
 ;;;;--------- For Scala -------------------
-;; (unless (package-installed-p 'scala-mode2)
-;;   (package-refresh-contents) (package-install 'scala-mode2))
+;;(unless (package-installed-p 'scala-mode2)
+;;  (package-refresh-contents) (package-install 'scala-mode2))
 ;;;;----------------------------------------------
 
 ;;; uncomment this line to disable loading of "default.el" at startup
@@ -256,30 +243,29 @@
 ; Set font
 ;(set-default-font "Inconsolata-12")
 
-;; (require 'color-theme)
-;;   (setq my-color-themes (list 'color-theme-billw 'color-theme-jsc-dark 
-;;                               'color-theme-sitaramv-solaris 'color-theme-resolve
-;;                               'color-theme-classic 'color-theme-jonadabian-slate
-;;                               'color-theme-kingsajz 'color-theme-shaman
-;;                               'color-theme-subtle-blue 'color-theme-snowish
-;;                               'color-theme-sitaramv-nt 'color-theme-wheat
-;; 			      'color-theme-adwaita 'color-theme-deeper-blue 
-;; 			      'color-theme-dichromacy 'color-theme-ir-black 
-;; 			      'color-theme-light-blue 'color-theme-manoj-dark
-;; 			      'color-theme-misterioso 
-;; 			      'color-theme-moe 'color-theme-moe-dark 'color-theme-moe-light 
-;; 			      'color-theme-tango 'color-theme-tango-dark
-;; 			      'color-theme-tsdh-dark 'color-theme-tsdh-light 
-;; 			      'color-theme-wheatgrass 'color-theme-whiteboard 
-;; 			      'color-theme-wombat 'color-theme-zenburn))
+(require 'color-theme)
+  (setq my-color-themes (list 'color-theme-billw 'color-theme-jsc-dark 
+                              'color-theme-sitaramv-solaris 'color-theme-resolve
+                              'color-theme-classic 'color-theme-jonadabian-slate
+                              'color-theme-kingsajz 'color-theme-shaman
+                              'color-theme-subtle-blue 'color-theme-snowish
+                              'color-theme-sitaramv-nt 'color-theme-wheat
+			      'color-theme-adwaita 'color-theme-deeper-blue 
+			      'color-theme-dichromacy 'color-theme-ir-black 
+			      'color-theme-light-blue 'color-theme-manoj-dark
+			      'color-theme-misterioso 
+			      'color-theme-moe 'color-theme-moe-dark 'color-theme-moe-light 
+			      'color-theme-tango 'color-theme-tango-dark
+			      'color-theme-tsdh-dark 'color-theme-tsdh-light 
+			      'color-theme-wheatgrass 'color-theme-whiteboard 
+			      'color-theme-wombat 'color-theme-zenburn))
 ; Load theme
 ;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-;; (color-theme-initialize)
-;; (color-theme-zenburn)
-;; (color-theme-tty-dark)
-;; (load-theme 'monokai t)
-;; (load-theme 'exu t)
-;; (load-theme 'zenburn t)
+(require 'color-theme)
+;;(color-theme-initialize)
+;;(color-theme-tty-dark)
+;(load-theme 'monokai t)
+;(load-theme 'exu t)
 ;(color-theme-snowish)
 
 ;; Gap
@@ -295,9 +281,5 @@
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (require 'org-journal)
 (custom-set-variables
- '(org-journal-dir "~/git/org/journal/"))
-;; (require 'ox-reveal)
-
-(setq
- browse-url-browser-function 'browse-url-generic
- browse-url-generic-program "google-chrome")
+ '(org-journal-dir "~/git/org-projects/journal/"))
+(require 'ox-reveal)

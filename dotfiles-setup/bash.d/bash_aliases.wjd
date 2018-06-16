@@ -47,6 +47,7 @@ alias treeacl='tree -A -C -L 2'
 alias em='emacs -nw'     # No X11 windows
 alias eqq='emacs -nw -Q' # No config and no X11
 
+function setzoom() { gsettings set org.gnome.desktop.interface text-scaling-factor "$@"; }
 
 # For mounting a Nexus 4; see http://youtu.be/fw2MKGIgyF4
 # and http://www.omgubuntu.co.uk/2013/06/mount-nexus-4-on-ubuntu

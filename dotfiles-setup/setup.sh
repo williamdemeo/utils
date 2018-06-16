@@ -114,7 +114,6 @@ else
     echo
 	  echo '         WARNING: skipping java setup!'
 	  echo
-	  exit 1
   fi
 fi
 echo
