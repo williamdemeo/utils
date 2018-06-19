@@ -329,6 +329,24 @@ then select "+Install".  Search for and install the following:
 
 ---
 
+### install some add-on packages to the atom editor
+Lauch vscode by typing `code &` at the command prompt. From the "View" menu, select
+"Extensions".  A search box should appear in the left pane.  Type each of the
+names of each of extensions in the list below, hitting enter after each name.
+Each time a list of candidates should appear.  When you find the one you want, select
+"install."
+
++ GitLens
++ Git History
++ Project Manager
++ Lean
++ reStructuredText
++ Zenburn Theme
++ Emacs Friendly Keymap (I found tihs to be the best Emacs keybinding extension)
+
+
+---
+
 ### remove some bloatware
 
 The steps in this section are probably unecessary if you select a **minimal**  installation when installing ubuntu.
