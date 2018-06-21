@@ -149,34 +149,36 @@ The following is a list of apps I install from the command line using
 
 (The command used to install all packages at once appears below.)
 
-| Name  | Description                      |
-| ---   | ---                              |
-| emacs | GNU Emacs editor (metapackage) |
-| coq | the Coq proof assistant |
-| proofgeneral | a generic frontend (IDE) for proof assistants |
-| prooftree | proof-tree visualization for Proof General |
-| git   | fast, scalable, distributed revision control system |
-| jed   | editor for programmers (textmode version) |
-| nemo  | File manager and graphical shell for Cinnamon |
-| build-essential | Informational list of build-essential packages |
-| cmake   | cross-platform, open-source make system |
-| dconf-tools    | transitional dummy package |
-| libgmp-dev | Multiprecision arithmetic library developers tools |
-| pm-utils | utilities and scripts for power management |
+| Name               | Description                                         |
+| ---                | ---                                                 |
+| emacs              | GNU Emacs editor (metapackage)                      |
+| coq                | the Coq proof assistant                             |
+| proofgeneral       | a generic frontend (IDE) for proof assistants       |
+| prooftree          | proof-tree visualization for Proof General          |
+| git                | fast, scalable, distributed revision control system |
+| jed                | editor for programmers (textmode version)           |
+| nemo               | File manager and graphical shell for Cinnamon       |
+| build-essential    | Informational list of build-essential packages      |
+| cmake              | cross-platform, open-source make system             |
+| dconf-tools        | transitional dummy package                          |
+| libgmp-dev         | Multiprecision arithmetic library developers tools  |
+| pm-utils           | utilities and scripts for power management          |
+| Okular             | Universal document viewer                           |
+| djview4            | djvu document viewer                                |
 | texlive                   | TeX Live: A decent selection of the TeX Live packages |
-| texlive-bibtex-extra      | TeX Live: BibTeX additional styles |
-| texlive-generic-extra     | TeX Live: transitional dummy package |
-| texlive-latex-extra       | TeX Live: LaTeX additional packages |
-| texlive-latex-recommended | TeX Live: LaTeX recommended packages |
-| texlive-publishers        | TeX Live: Publisher styles, theses, etc. |
-| texlive-science           | TeX Live: Mathematics, natural sciences, computer science packages|
-| texlive-xetex             | TeX Live: XeTeX and packages |
+| texlive-bibtex-extra      | TeX Live: BibTeX additional styles           |
+| texlive-generic-extra     | TeX Live: transitional dummy package         |
+| texlive-latex-extra       | TeX Live: LaTeX additional packages          |
+| texlive-latex-recommended | TeX Live: LaTeX recommended packages         |
+| texlive-publishers        | TeX Live: Publisher styles, theses, etc.     |
+| texlive-science           | TeX Live: Mathematics, natural sciences, computer science packages |
+| texlive-xetex             | TeX Live: XeTeX and packages                 |
 
 To install all of these at once, copy-and-paste the following into a terminal window:
 
 ```sh
 sudo apt install emacs coq proofgeneral prooftree git jed nemo build-essential cmake dconf-tools pm-utils \
-texlive texlive-latex-extra texlive-xetex texlive-science texlive-latex-recommended \
+okular djview4 texlive texlive-latex-extra texlive-xetex texlive-science texlive-latex-recommended \
 texlive-publishers texlive-generic-extra texlive-bibtex-extra
 ```
 
@@ -200,7 +202,6 @@ Launch emacs and invoke `M-x package-list-packages`.  From the list, choose to i
 + magit
 + org
 + org-journal
-+
 
 ---
 
@@ -211,10 +212,11 @@ Launch emacs and invoke `M-x package-list-packages`.  From the list, choose to i
 | MEGAsync | synch between computer and MEGA cloud storage account | http://mega.nz |
 | atom     | modern extensible editor         | https://atom.io |
 | Chrome   | web browser | https://www.google.com/chrome |
-| IntelliJ IDEA | IDE I use for Scala programming | https://www.jetbrains.com/idea/download |
+| IntelliJ IDEA | IDE I use for programming in Scala | https://www.jetbrains.com/idea/download |
 | Lean     | Interactive theorem prover and fp lang | https://leanprover.github.io |
-| VS Code | IDE I sometimes use for Lean | https://code.visualstudio.com/ |
-
+| VS Code | IDE I use for programming in Lean | https://code.visualstudio.com/ |
+| JDK | Java Development Kit | [oracle javase overview & download page](http://www.oracle.com/technetwork/java/javase/overview/index.html) |
+| Acroread | pdf viewer | See [these instructions](https://linuxconfig.org/how-to-install-adobe-acrobat-reader-on-ubuntu-18-04-bionic-beaver-linux)
 
 0. **MEGAsync** Go to http://mega.nz and use the hamburger menu on the right to select
    "Apps" > "sync client" and download the appropriate .deb package. Once the download
@@ -311,6 +313,11 @@ Launch emacs and invoke `M-x package-list-packages`.  From the list, choose to i
 
    - Finally, launch vscode by entering `code` on the command line, then open
      `vscode-lean` and start developing (F5 starts the debugger).
+
+6. **JDK**  [This post](http://williamdemeo.github.io/2017/12/06/java-on-linux/) describes the best way to set up (multiple versions of) Java on Linux.
+
+
+
 
 ---
 
