@@ -405,9 +405,9 @@ replace occurrences of `mg` with the name of your favorite text editor.
    EndSection  
    ```
 
-   Save the file with `Ctrl+O`.
+   Save the file with `C-x C-c`. 
 
-
+5. Finally, reboot and test the trackpoint and touchpad.
 
 ---
 
