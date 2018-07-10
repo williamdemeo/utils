@@ -156,7 +156,7 @@ The following is a list of apps I install from the command line using
 | proofgeneral       | a generic frontend (IDE) for proof assistants       |
 | prooftree          | proof-tree visualization for Proof General          |
 | git                | fast, scalable, distributed revision control system |
-| jed                | editor for programmers (textmode version)           |
+| mg                 | microscopic GNU Emacs-style editor                  |
 | nemo               | File manager and graphical shell for Cinnamon       |
 | build-essential    | Informational list of build-essential packages      |
 | cmake              | cross-platform, open-source make system             |
@@ -177,8 +177,9 @@ The following is a list of apps I install from the command line using
 To install all of these at once, copy-and-paste the following into a terminal window:
 
 ```sh
-sudo apt install emacs coq proofgeneral prooftree git jed nemo build-essential cmake dconf-tools pm-utils \
-okular djview4 texlive texlive-latex-extra texlive-xetex texlive-science texlive-latex-recommended \
+sudo apt install emacs coq proofgeneral prooftree git mg nemo build-essential \ 
+cmake dconf-tools pm-utils okular djview4 texlive texlive-latex-extra \ 
+texlive-xetex texlive-science texlive-latex-recommended \
 texlive-publishers texlive-generic-extra texlive-bibtex-extra
 ```
 
@@ -192,8 +193,9 @@ texlive-latex-extra-doc dot2tex prerex texlive-pictures-doc vprerex texlive-publ
 View a brief description of these packages with the command:
 
 ```sh
-dpkg -l tcl-tclreadline python-pygments icc-profiles libfile-which-perl libspreadsheet-parseexcel-perl \
-texlive-latex-extra-doc dot2tex prerex texlive-pictures-doc vprerex texlive-publishers-doc texlive-science-doc
+dpkg -l tcl-tclreadline python-pygments icc-profiles libfile-which-perl \ 
+libspreadsheet-parseexcel-perl texlive-latex-extra-doc dot2tex prerex \ 
+texlive-pictures-doc vprerex texlive-publishers-doc texlive-science-doc
 ```
 
 ### install some add-on packages to the emacs editor
@@ -350,6 +352,61 @@ Each time a list of candidates should appear.  When you find the one you want, s
 + reStructuredText
 + Zenburn Theme
 + Emacs Friendly Keymap (I found tihs to be the best Emacs keybinding extension)
+
+### adjust trackpoint settings
+
+Following the advice given in [this answer](https://askubuntu.com/a/761504/100671),
+and on [this page](https://www.reddit.com/r/thinkpad/comments/5rcwlq/heres_how_to_get_the_perfect_trackpoint/),
+
+**N.B.** The instructions in this section assume you have the `mg` 
+(microscopic Emacs) editor installed.  You should either install `mg` 
+before following these instructions (e.g., with `sudo apt install mg`), or
+replace occurrences of `mg` with the name of your favorite text editor.
+
+1. Make sure the `xserver-xorg-input-libinput` package is installed.
+
+   ```sh
+   sudo apt-get install xserver-xorg-input-libinput
+   ```
+
+2. Edit the file `/etc/udev/rules.d/10-trackpoint.rules`,
+
+   ```sh
+   sudo -i mg /etc/udev/rules.d/10-trackpoint.rules
+   ```
+
+   so that it includes the following lines:
+
+   ```sh
+   ACTION=="add",
+   SUBSYSTEM=="input",
+   ATTR{name}=="TPPS/2 IBM TrackPoint",
+   ATTR{device/sensitivity}="132",
+   ATTR{device/speed}="158",
+   ATTR{device/inertia}="6",
+   ATTR{device/press_to_select}="0"
+   ```
+
+4. Finally, change the acceleration of the cursor.
+
+   ```
+   sudo mg /usr/share/X11/xorg.conf.d/90-libinput.conf
+   ```
+
+   Replace the first section with the following code:
+
+   ```
+   Section "InputClass"  
+     Identifier "libinput pointer catchall"  
+     MatchIsPointer "on"  
+     MatchDevicePath "/dev/input/event*"  
+     Driver "libinput"  
+     Option "AccelSpeed" "-0.40"  
+   EndSection  
+   ```
+
+   Save the file with `Ctrl+O`.
+
 
 
 ---
